@@ -1,7 +1,7 @@
-name: 🐉 SABRI DRAGON BUILDER
+name: SABRI DRAGON BUILDER
 
 on:
-  workflow_dispatch: # تشغيل يدوي لضمان التحكم
+  workflow_dispatch:
 
 jobs:
   build:
@@ -9,11 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 🛠️ Setup Environment
+      - name: 🛠️ Setup Heavy Tools
         run: |
           sudo apt update
-          sudo apt install -y python3-pip build-essential git python3-setuptools
-          pip3 install --user --upgrade buildozer cython==0.29.33 kivy==2.2.1
+          sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev python3-pip
+          pip3 install --user --upgrade buildozer cython==0.29.33 virtualenv
 
       - name: 🏗️ Build APK with Sabri Power
         run: |
