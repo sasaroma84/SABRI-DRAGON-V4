@@ -1,0 +1,28 @@
+name: 🐉 SABRI DRAGON BUILDER
+
+on:
+  workflow_dispatch: # تشغيل يدوي لضمان التحكم
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🛠️ Setup Environment
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip build-essential git python3-setuptools
+          pip3 install --user --upgrade buildozer cython==0.29.33 kivy==2.2.1
+
+      - name: 🏗️ Build APK with Sabri Power
+        run: |
+          buildozer android debug
+        env:
+          ACCEPT_SDK_LICENSE: "yes"
+
+      - name: 📦 Upload Sabri APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: SABRI-DRAGON-V4-APK
+          path: bin/*.apk
